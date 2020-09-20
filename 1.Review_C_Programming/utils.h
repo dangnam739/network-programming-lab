@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SCD_LENGTH 4
+#define SCD_LENGTH 6
 
-typedef struct Subject{
+typedef struct subject{
     char code[7];
     char course[50];
     char day[10];
     char time[10];
     char period[10];
-    char week[10];
-    char room;
+    char week[20];
+    char room[10];
 }Subject;
 
 struct schedule{
@@ -22,84 +22,15 @@ struct schedule{
 typedef struct schedule Schedule;
 typedef Schedule *SchedulePtr;
 
-void insert(SchedulePtr *root, Subject subject);
+char *convert2Day(char num);
+char *convert2Time(char num);
+char *period(char *s1, char *s2);
+char *week(char **tokens, int count);
+char **tokenize(char *str, char *delimitador, int *count);
+char *get_Room_period(SchedulePtr root, int period, char *day);
+SchedulePtr makeNode(Subject v);
+SchedulePtr append(SchedulePtr root, Subject sub);
 int isEmpty(SchedulePtr root);
-void printSchedule(Schedule currentPtr);
-
-
-void insert(SchedulePtr *root, Subject subject)
-{
-    SchedulePtr newPtr;
-    SchedulePtr prevPtr;
-    SchedulePtr curPtr;
-
-    newPtr = malloc(sizeof(Schedule));
-
-    if(newPtr != NULL){
-        newPtr->subject = subject;
-        newPtr->nextPtr = NULL;
-
-        prevPtr = NULL;
-        curPtr = *root;
-
-        while(curPtr->nextPtr != NULL){
-            curPtr = curPtr->nextPtr;
-        }
-
-        curPtr->nextPtr = newPtr;
-    }
-}
-
-
-int isEmpty(SchedulePtr root){
-    return root == NULL;
-}
-
-void printSchedule(Schedule currentPtr){
-
-}
-
-char *convert2Day(char num){
-    if (num == '2')
-        return "Monday";
-    if (num == '3')
-        return "Tuesday";
-    if (num == '4')
-        return "Wednesday";
-    if (num == '5')
-        return "Thursday";
-    if (num == '6')
-        return "Friday";
-    if (num == '7')
-        return "Saturday";
-    if (num == '8')
-        return "Sunday";
-}
-
-char *convert2Time(char num){
-    if (num == '1')
-        return "Morning";
-    else
-        return "Afternoon";
-
-}
-
-char** tokenize(char* str, char* delimitador)
-{
-    char* tmp;
-    char** tokens;
-    int i = 0;
-    tokens = (char**)malloc(sizeof(char*) * SCD_LENGTH);
-
-    tmp = strtok(str, delimitador);
-
-    while (tmp != NULL)
-    {
-        tokens[i] = (char*)malloc((strlen(tmp) + 1) * sizeof(char));
-        strcpy(tokens[i], tmp);
-        tmp = strtok(NULL, delimitador);
-        i++;
-    }
-
-    return tokens;
-}
+void printSchedule_1(SchedulePtr root);
+void printSchedule_2(SchedulePtr root);
+SchedulePtr readFile(FILE *fPtr);
