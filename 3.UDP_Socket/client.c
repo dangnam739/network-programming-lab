@@ -26,6 +26,8 @@ void clean_up_child_process(int signal_number)
     /* Store its exit status in a global variable. */
     child_exit_status = status;
 }
+
+
 int main(int argc, char **argv)
 {
     struct sockaddr_in serv_addr;
@@ -54,7 +56,9 @@ int main(int argc, char **argv)
         fprintf(stderr, "inet_aton() failed\n");
         exit(1);
     }
+
     pid = fork();
+
     if (pid < 0)
     {
         err("Fork Error");
@@ -65,13 +69,11 @@ int main(int argc, char **argv)
         while (1)
         {
             bzero(buf, BUFLEN);
-            printf("Attempting to READ to socket %d: ", sockfd);
-            fflush(stdout);
             //recvfrom here
             if (recvfrom(sockfd, buf, BUFLEN, 0, (struct sockaddr *)&serv_addr, &slen) == -1)
                 err("recvfrom()");
 
-            printf("The message from the server is: %s \n", buf);
+            printf("Recived message: %s \n", buf);
             if (strcmp(buf, "bye\n") == 0)
             {
                 ppid = getppid();
@@ -86,11 +88,9 @@ int main(int argc, char **argv)
         //parent will send to server
         while (1)
         {
-            printf("Please enter the message to send: ");
+            printf("Your message   : ");
             bzero(buf, BUFLEN);
             fgets(buf, BUFLEN, stdin);
-            printf("Attempting to write to socket %d: ", sockfd);
-            fflush(stdout);
             //send to here
             if (sendto(sockfd, buf, BUFLEN, 0, (struct sockaddr *)&serv_addr, slen) == -1)
             {

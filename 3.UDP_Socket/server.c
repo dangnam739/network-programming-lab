@@ -64,7 +64,7 @@ int main(void)
             //get client 0 port
             client_port[0] = ntohs(cli_addr[0].sin_port);
             clients++;
-            printf("Client 0 connected. Port: %d\n", client_port[0]);
+            printf("Client 1 connected. Port: %d\n", client_port[0]);
             sendto(sockfd, "You are the only client.", 24, 0, (struct sockaddr *)&cli_temp, slen_temp);
         }
         else if (clients == 1)
@@ -82,7 +82,7 @@ int main(void)
                 cli_addr[1] = cli_temp;
                 client_port[1] = ntohs(cli_addr[1].sin_port);
                 clients++;
-                printf("GOt second client\n");
+                printf("Client 2 connected. Port: %d\n", client_port[1]);
                 sendto(sockfd, buf, BUFLEN, 0, (struct sockaddr *)&cli_addr[0], slen[0]);
             }
         }
