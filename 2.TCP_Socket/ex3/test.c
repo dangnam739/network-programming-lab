@@ -10,8 +10,12 @@ int main()
 
     SchedulePtr root = NULL;
     root = readFile(fPtr);
+    char *buf;
     char *buffer;
-    buffer = getSubject_by_day(root, "Monday");
+    printf("Enter string: ");
+    scanf("%s", buf);
+
+    buffer = getSubject_by_day(root, buf);
     printf("%s\n", buffer);
 
     fclose(fPtr);

@@ -10,7 +10,10 @@
 
 #define MAXLINE 4096   /*max text line length*/
 #define SERV_PORT 3000 /*port*/
-#define LISTENQ 8      /*maximum number of client connections */
+#define LISTENQ 8      /*maximum number of client connections
+*/
+
+char *buffer;
 
 int main(int argc, char **argv)
 {
@@ -49,13 +52,13 @@ int main(int argc, char **argv)
     SchedulePtr root = NULL;
     root = readFile(fPtr);
     fclose(fPtr);
-    char *buffer;
 
     while ((n = recv(connfd, buf, MAXLINE, 0)) > 0)
     {
       printf("%s", "Day received from and resent to the client:");
       puts(buf);
-      buffer = getSubject_by_day(root, buf);
+      buffer = getSubject_by_day(root, "Monday");
+      printf("%s\n", buffer);
       send(connfd, buffer, strlen(buffer) + 1, 0);
     }
 
