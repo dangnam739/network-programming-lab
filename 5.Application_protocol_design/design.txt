@@ -1,0 +1,29 @@
+Momolog Chat
+
+chuc nang:
+    - Dang nhap
+    - Gui noi dung Chat
+
+
+1. Dang nhap
+Server:
+    - Kiem tra username, password
+    - Thong bao ket qua -> phu hop -> tao file log cho Client
+
+Client:
+    - Gui username, password
+
+2. Gui noi dung Chat
+
+
+
+3. Chuc nang cua Server:
+Server:
+    - Nhan biet 1 ban tin -> xac nhan xem ban tin gi ? (Dang nhap/Chat)
+    =>
+
+4. Cau truc ban tin:
+
+Quy dinh:
+    - Ban tin login bat dau bang login: LOGIN <username> <password>
+    - Ban tin chat: CHAT <text>
