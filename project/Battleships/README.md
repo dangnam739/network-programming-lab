@@ -40,7 +40,8 @@ You may change the hostname and port that the server binds to and the client con
 | Run | Doi input tu Server va phan tich input, thuc hien cau lenh tuong ung |
 | parseInput | Phan tich input nhan tu Server |
 | sendBoard | Gui board cua client len Server |
-| writeObject | void():  Ghi mot object vao mot outputStream |
+|sendMove | Gui toa do ban tren board cua doi thu |
+| writeObject | void():  Ghi mot object vao mot outputStream
 
 
 
